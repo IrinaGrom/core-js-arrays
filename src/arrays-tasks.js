@@ -54,7 +54,8 @@ function sumArrays(/* arr1, arr2 */) {
  *    findElement([0, 1, 2, 3, 4, 5], 5) => 5
  */
 function findElement(arr, value) {
-  return arr.findIndex((e) => e === value);
+  return arr.indexOf(value);
+  // return arr.findIndex((e) => e === value);
 }
 
 /**
@@ -89,13 +90,7 @@ function findAllOccurrences(arr, item) {
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
 function removeFalsyValues(arr) {
-  let result = [];
-  arr.forEach((item) => {
-    if (item) {
-      result = [...result, item];
-    }
-  });
-  return result;
+  return arr.filter((item) => item);
 }
 
 /**
@@ -109,12 +104,7 @@ function removeFalsyValues(arr) {
  *    getStringsLength([ 'angular', 'react', 'ember' ]) => [ 7, 5, 5 ]
  */
 function getStringsLength(arr) {
-  let result = [];
-  arr.forEach((item) => {
-    if (typeof item === 'string') {
-      result = [...result, item.length];
-    }
-  });
+  const result = arr.map((el) => el.length);
   return result;
 }
 
@@ -244,8 +234,7 @@ function getTail(arr, n) {
  *    doubleArray([]) => []
  */
 function doubleArray(arr) {
-  const result = [...arr, ...arr];
-  return result;
+  return arr.concat(arr);
 }
 
 /**
@@ -374,14 +363,15 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(arr, chunkSize) {
-  let result = [];
-  arr.forEach((item, index, array) => {
-    if (index === 0 || index % chunkSize === 0) {
-      result = [...result, array.slice(index, index + chunkSize)];
-    }
-  });
-  return result;
+function createChunks(/* arr, chunkSize */) {
+  // let result = [];
+  // arr.forEach((item, index, array) => {
+  //   if (index === 0 || index % chunkSize === 0) {
+  //     result = [...result, array.slice(index, index + chunkSize)];
+  //   }
+  // });
+  // return result;
+  // second var
   // let result = arr.map(function(item, index, array) {
   //   if (index === 0) {
   //     return array.slice(index, chunkSize);
@@ -389,6 +379,7 @@ function createChunks(arr, chunkSize) {
   //     return array.slice(index, index + chunkSize);
   //   }
   // });
+  throw new Error('Not implemented');
 }
 
 /**
@@ -407,6 +398,7 @@ function generateOdds(len) {
   const result = [];
   let count = -1;
   result.length = len;
+  result.fill(0);
   function numberFunc(param) {
     count = param + 2;
     return count;
@@ -451,18 +443,13 @@ function getElementByIndices(arr, indices) {
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
 function getFalsyValuesCount(arr) {
-  const filterArr = arr.filter((el) => {
-    if (el) {
-      return el;
-    }
-    return undefined;
-  });
-  let resultArr = [];
-  filterArr.forEach((el) => {
-    resultArr = [...resultArr, el];
-  });
+  const filterArr = arr.filter((el) => el);
+  // let resultArr = [];
+  // filterArr.forEach((el) => {
+  //   resultArr = [...resultArr, el];
+  // });
   // const result = arr.length - resultArr.length;
-  return resultArr.length;
+  return arr.length - filterArr.length;
 }
 
 /**
