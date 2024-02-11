@@ -288,8 +288,11 @@ function toStringList(arr) {
  *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
  *   distinct([]) => []
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const mySet = new Set();
+  arr.forEach((el) => mySet.add(el));
+  const result = [...mySet];
+  return result;
 }
 
 /**
@@ -635,8 +638,22 @@ function findLongestIncreasingSubsequence(nums) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  const resArr = [];
+  let val;
+  const eArr = arr.entries();
+
+  function dknow() {
+    for (let index = 0; index <= val[0]; index += 1) {
+      resArr.push(val[1]);
+    }
+  }
+
+  for (let j = 0; j < arr.length; j += 1) {
+    val = eArr.next().value;
+    dknow();
+  }
+  return resArr;
 }
 
 /**
@@ -652,8 +669,25 @@ function propagateItemsByPositionIndex(/* arr */) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  function toLeft() {
+    arr.unshift(arr[arr.length - 1]);
+    arr.pop();
+  }
+  function toRight() {
+    arr.push(arr[0]);
+    arr.shift();
+  }
+  if (n > 0) {
+    for (let i = 0; i < n; i += 1) {
+      toLeft();
+    }
+  } else {
+    for (let i = 0; i > n; i -= 1) {
+      toRight();
+    }
+  }
+  return arr;
 }
 
 /**
@@ -669,8 +703,88 @@ function shiftArray(/* arr, n */) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  let el;
+  function convert(item) {
+    switch (item) {
+      case 'zero':
+        el = 0;
+        break;
+      case 'one':
+        el = 1;
+        break;
+      case 'two':
+        el = 2;
+        break;
+      case 'three':
+        el = 3;
+        break;
+      case 'four':
+        el = 4;
+        break;
+      case 'five':
+        el = 5;
+        break;
+      case 'six':
+        el = 6;
+        break;
+      case 'seven':
+        el = 7;
+        break;
+      case 'eight':
+        el = 8;
+        break;
+      case 'nine':
+        el = 9;
+        break;
+      default:
+        break;
+    }
+    return el;
+  }
+  const mapArr = arr.map((item) => convert(item));
+  const sorted = mapArr.sort();
+  function unconvert(item) {
+    switch (item) {
+      case 0:
+        el = 'zero';
+        break;
+      case 1:
+        el = 'one';
+        break;
+      case 2:
+        el = 'two';
+        break;
+      case 3:
+        el = 'three';
+        break;
+      case 4:
+        el = 'four';
+        break;
+      case 5:
+        el = 'five';
+        break;
+      case 6:
+        el = 'six';
+        break;
+      case 7:
+        el = 'seven';
+        break;
+      case 8:
+        el = 'eight';
+        break;
+      case 9:
+        el = 'nine';
+        break;
+      default:
+        break;
+    }
+    return el;
+  }
+  const resArr = sorted.map((item) => {
+    return unconvert(item);
+  });
+  return resArr;
 }
 
 /**
